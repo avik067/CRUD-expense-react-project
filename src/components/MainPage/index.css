@@ -1,0 +1,29 @@
+
+
+.main{ 
+    border :4px solid black ;
+    padding: 10px;
+    border-radius: 10px;
+    margin : 10px
+}
+
+.header-list { 
+    background-color: gray;
+}
+.p{ 
+    overflow: auto;
+    flex-grow: 1;
+    /* width:15% ; */
+ font-size: 10px;
+ color:black;
+ font-weight: 700;
+}
+.button-gap {
+   min-width:50px
+}
+hr{
+    min-height:100%;
+    width: 1px ;
+    color:antiquewhite;
+}
+
