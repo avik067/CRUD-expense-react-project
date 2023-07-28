@@ -1,16 +1,14 @@
 import { Component } from "react";
 import './index.css'
 
-class Edit extends Component {
+class PostData extends Component {
    
    
      
     constructor (props) {
         super(props)
-         const {putDetails} =props
-         const {_id='',name='',date_of_expense='' ,category='',amount=0  } = putDetails
-         
-        this.state = {nm:name,id:_id,cat:category,dt:date_of_expense,amt:amount,sendDt:''}
+
+        this.state = {nm:'',cat:'',dt:'',amt:0,sendDt:'',createdBy:''}
         
     }
 
@@ -18,32 +16,33 @@ class Edit extends Component {
 
 
     cancleEdit = () => {
-        const {refreshPut} = this.props
-        refreshPut()
+        const {refreshPost} = this.props
+        refreshPost()
     }
 
 
     submitData = async (event) => {
       event.preventDefault()
-      const {refreshPut} = this.props
-       const {nm,cat,sendDt,amt,id} = this.state
+      const {refreshPost} = this.props
+       const {nm,cat,sendDt,amt,createdBy} = this.state
       
       const jsonOb= {
         name:nm ,
         category:cat,
         amount:amt ,
         date_of_expense:sendDt,
+        created_by:createdBy
       }
 
       const options = {
-        method: 'PUT',
+        method: 'POST',
         headers: {
             "Content-Type": "application/json"
         },
         body: JSON.stringify(jsonOb),
       }
      try{
-      const response = await fetch(`https://expense-api-roan.vercel.app/expense/${id}/`,options)
+      const response = await fetch(`https://expense-api-roan.vercel.app/expense`,options)
       const data = await response.json()
       console.log(data)
       console.log(data.status())
@@ -51,7 +50,7 @@ class Edit extends Component {
      catch(e) {
         console.log(e)
      }
-     refreshPut()
+     refreshPost()
 
     }
 
@@ -82,11 +81,17 @@ class Edit extends Component {
         this.setState({amt:amtVal})
     }
 
+    changeUser = (event) =>{
+        const createdBy= event.target.value
+        console.log(createdBy)
+        this.setState({createdBy})
+    }
+
     render() {
-         const {nm,cat,dt,amt} =this.state
+         const {nm,cat,dt,amt,createdBy} =this.state
         return (
             <form  className="form" onSubmit={this.submitData}>
-                <h1>Edit Expense</h1>
+                <h1>Create New Expense</h1>
              <p>Name</p>
              <input type="text" onChange={this.changeName} value={nm}/>
              <p>Category</p>
@@ -96,6 +101,10 @@ class Edit extends Component {
              <p>Expense Amount</p>
              <input type="text" onChange={this.changeAmount} value={amt}/>
              <br />
+             <p>Created By</p>
+             <input type="text" onChange={this.changeUser} value={createdBy}/>
+             <br />
+             <br/>
              <button type="button" onClick={this.cancleEdit}>Cancle</button>
              <button type="submit" className="green-but">Create Expense</button>
     </form>
@@ -104,4 +113,4 @@ class Edit extends Component {
 }
 
 
-export default Edit
+export default PostData

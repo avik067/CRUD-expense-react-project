@@ -6,10 +6,18 @@
     border-radius: 10px;
     margin : 10px
 }
+.add {
+    background-color: green ;
+    outline: none;
+    border:none;
+    padding: 5px;
+    color:white ;
+}
 
 .header-list { 
     background-color: gray;
 }
+
 .p{ 
     overflow: auto;
     flex-grow: 1;
@@ -21,13 +29,25 @@
 .button-gap {
    min-width:50px
 }
-hr{
-    min-height:100%;
-    width: 1px ;
-    color:antiquewhite;
+.next{
+  background-color: aqua;
+  border:none ;
+  outline:none;
+  margin: 2px;
+  padding-inline: 10px;
+}
+.pre{
+   background-color: brown;
+   border:none ;
+  outline:none;
+  margin: 2px;
+  padding-inline: 10px;
 }
 
 .center{
     justify-content: center;
+}
+.apart{
+    justify-content: space-between;
 }
 
