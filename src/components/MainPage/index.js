@@ -49,8 +49,8 @@ class MainPage extends Component {
       const  {arrayList} = this.state
 
       const editOb= arrayList.find(each => each._id === id )
-      console.log(editOb)
-      this.setState({showEdit:true,putOb:editOb})
+      
+      this.setState(pre => ({...pre,showEdit:true,putOb:editOb}))
     }
    
     refreshPut = () =>{
@@ -60,6 +60,7 @@ class MainPage extends Component {
 
     render () {
               const {arrayList,isLoading,showEdit,putOb} = this.state
+              
         return (
           <>
             <div className="main">
@@ -89,7 +90,7 @@ class MainPage extends Component {
 
                 </ul>
             </div>
-            {showEdit && <Edit refreshPut={this.putInDb} details={putOb} />}
+            {showEdit && <Edit putDetails={putOb} refreshPut={this.putInDb} key={putOb._id} />}
             </>
         )
     }
