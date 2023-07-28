@@ -7,13 +7,21 @@ class Edit extends Component {
      
     constructor (props) {
         super(props)
-         const {putDetails,refreshPut} =props
-         const {_id,name,date_of_expense ,category,amount  } = putDetails
-        this.state = {formData:{},nm:name,id:_id,cat:category,dt:date_of_expense,amt:amount,sendDt:''}
+         const {putDetails} =props
+         const {_id='',name='',date_of_expense='' ,category='',amount=0  } = putDetails
+        this.state = {nm:name,id:_id,cat:category,dt:date_of_expense,amt:amount,sendDt:''}
         
     }
+
+    cancleEdit = () => {
+        const {refreshPut} = this.props
+        refreshPut()
+    }
+
+
     submitData = async (event) => {
       event.preventDefault()
+      const {refreshPut} = this.props
        const {nm,cat,sendDt,amt,id} = this.state
       const jsonOb= {
         name:nm ,
@@ -21,6 +29,7 @@ class Edit extends Component {
         amount:amt ,
         date_of_expense:sendDt,
       }
+
       const options = {
         method: 'PUT',
         headers: {
@@ -32,10 +41,13 @@ class Edit extends Component {
       const response = await fetch(`https://expense-api-roan.vercel.app/expense/${id}/`,options)
       const data = await response.json()
       console.log(data)
+      console.log(data.status())
      }
      catch(e) {
-        console.log(e.status())
+        console.log(e)
      }
+     refreshPut()
+
     }
 
     changeName= (event) =>{
@@ -79,7 +91,7 @@ class Edit extends Component {
              <p>Expense Amount</p>
              <input type="text" onChange={this.changeAmount} value={amt}/>
              <br />
-             <button>Cancle</button>
+             <button type="button" onClick={this.cancleEdit}>Cancle</button>
              <button type="submit" className="green-but">Create Expense</button>
     </form>
         );

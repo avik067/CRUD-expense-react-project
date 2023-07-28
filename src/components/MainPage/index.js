@@ -8,7 +8,7 @@ import './index.css'
 
 class MainPage extends Component {
 
-    state = {arrayList:[],startIndedx:0 ,putOb:{} ,postOb:{}, endIndex:10,isLoading:true,showEdit:true,showPost:false}
+    state = {arrayList:[],startIndedx:0 ,putOb:{} ,postOb:{}, endIndex:10,isLoading:true,showEdit:false,showPost:false}
 
     componentDidMount () {
         this.getData()
@@ -52,10 +52,15 @@ class MainPage extends Component {
       
       this.setState(pre => ({...pre,showEdit:true,putOb:editOb}))
     }
-   
-    refreshPut = () =>{
-       this.getData()
+    
+    refreshPage = () =>{
+      console.log("Hi refresh")
+      this.setState({isLoading:true,showEdit:false})
+      this.getData()
     }
+
+
+
 
 
     render () {
@@ -90,7 +95,7 @@ class MainPage extends Component {
 
                 </ul>
             </div>
-            {showEdit && <Edit putDetails={putOb} refreshPut={this.putInDb} key={putOb._id} />}
+            {showEdit && <Edit putDetails={putOb} refreshPut={this.refreshPage} key={putOb._id} />}
             </>
         )
     }
