@@ -1,11 +1,18 @@
 
 import './index.css'
 
-const ListItem = ({details}) => {
+const ListItem = ({details,triggerDel,triggerPut}) => {
    
-    const {updatedAt,name,date_of_expense,created_by,category,amount} = details
-
-   console.log("this is list of data")
+    const {_id,updatedAt,name,date_of_expense,created_by,category,amount} = details
+ 
+    const  editList = () =>{
+        triggerPut(_id)
+    }
+    
+    const delList =() =>{
+        triggerDel(_id)
+    }
+    
 
     return <li className='row-nor'>
     <p className="p">{name}</p>
@@ -14,7 +21,11 @@ const ListItem = ({details}) => {
     <p className="p">{amount}</p>
     <p className="p">{updatedAt}</p>
     <p className="p">{created_by}</p>
-    <div><button>Del</button><button>Edit</button></div> </li>
+    <div>
+    <button type="button" onClick={editList}>Edit</button>
+    <button type="button" onClick ={delList}>Del</button>
+    </div> 
+    </li>
 }
 
 
