@@ -88,7 +88,7 @@ class Edit extends Component {
     } 
 
     changeAmount = (event) =>{
-        const amtVal = event.target.valueAsNumber
+        const amtVal = event.target.value
         // console.log(amtVal)
         this.setState({amt:amtVal})
     }

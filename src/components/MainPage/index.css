@@ -43,7 +43,9 @@
   margin: 2px;
   padding-inline: 10px;
 }
-
+.search{
+    background-color:green ;
+}
 .center{
     justify-content: center;
 }

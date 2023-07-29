@@ -8,7 +8,7 @@ class PostData extends Component {
     constructor (props) {
         super(props)
 
-        this.state = {nm:'',cat:'',dt:new Date().toISOString().slice(0,10),amt:'',sendDt:'',createdBy:'',notice:'',showNotice:false}
+        this.state = {nm:'',cat:'',dt:new Date().toISOString().slice(0,10),amt:'',sendDt:new Date().toISOString(),createdBy:'',notice:'',showNotice:false}
         
     }
 
@@ -77,7 +77,7 @@ class PostData extends Component {
         this.setState({cat:catVal})
     }
     changeDate =(event) => {
-        const date = event.target.valueAsNumber
+        const date = event.target.value
         
         console.log(date)
         const  dateIso = new Date(date)
@@ -88,7 +88,7 @@ class PostData extends Component {
     } 
 
     changeAmount = (event) =>{
-        const amtVal = event.target.valueAsNumber
+        const amtVal = event.target.value
         // console.log(amtVal)
         this.setState({amt:amtVal})
     }

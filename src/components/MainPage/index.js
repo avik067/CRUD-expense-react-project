@@ -8,16 +8,17 @@ import './index.css'
 
 class MainPage extends Component {
 
-    state = {arrayList:[],startIndedx:0 ,putOb:{} ,postOb:{}, endIndex:5,isLoading:true,showEdit:false,showPost:false}
+    state = {arrayList:[],startIndedx:0 ,putOb:{} ,postOb:{},keyWord:'', endIndex:5,isLoading:true,showEdit:false,showPost:false}
 
     componentDidMount () {
         this.getData()
     }  
     
     getData = async () => {
-      
+      const {keyWord} = this.state
+      const  url= (keyWord === '') ? "https://expense-api-roan.vercel.app/expenses" : `https://expense-api-roan.vercel.app/expense/${keyWord}`
       try {
-        const rowData = await fetch("https://expense-api-roan.vercel.app/expenses")
+        const rowData = await fetch(url)
         const jsonData = await rowData.json()
         console.log(jsonData)
         this.setState({arrayList:jsonData,isLoading:false})
@@ -76,7 +77,10 @@ class MainPage extends Component {
         console.log("next")
     }
 
-
+    changeKeyword = (event) =>{
+      const key = event.target.value
+      this.setState({keyWord:key})
+    }
     render () {
           const {arrayList,isLoading,showEdit,putOb,showPost,startIndedx,endIndex} = this.state
               const onlyShow = arrayList.slice(startIndedx,endIndex)
@@ -85,6 +89,8 @@ class MainPage extends Component {
             <div className="main">
                 <div className="row-nor apart">
                   <h1>MY EXPENSE MANEGER </h1> 
+                  <input type="search" placeholder="Search By Name" onChange={this.changeKeyword} />
+                  <button type="button" className="search" onClick={this.getData}>Search</button>
                   <button type="button" className="add" onClick={this.showAdd}>+ New Expense</button>
                 </div>
               
