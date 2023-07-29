@@ -87,7 +87,7 @@ class MainPage extends Component {
         return (
           <>
             <div className="main">
-                <div className="row-nor apart">
+                <div className="row-nor apart wrap">
                   <h1>MY EXPENSE MANEGER </h1> 
                   <input type="search" placeholder="Search By Name" onChange={this.changeKeyword} />
                   <button type="button" className="search" onClick={this.getData}>Search</button>
