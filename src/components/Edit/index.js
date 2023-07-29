@@ -10,7 +10,7 @@ class Edit extends Component {
          const {putDetails} =props
          const {_id='',name='',date_of_expense='' ,category='',amount=0  } = putDetails
          
-        this.state = {nm:name,id:_id,cat:category,dt:date_of_expense,amt:amount,sendDt:''}
+        this.state = {nm:name,id:_id,cat:category,dt:new Date(date_of_expense).toISOString().slice(0,10),amt:amount,sendDt:date_of_expense}
         
     }
 
