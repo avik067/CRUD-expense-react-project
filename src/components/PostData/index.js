@@ -8,11 +8,10 @@ class PostData extends Component {
     constructor (props) {
         super(props)
 
-        this.state = {nm:'',cat:'',dt:'',amt:0,sendDt:'',createdBy:''}
+        this.state = {nm:'',cat:'',dt:new Date().toISOString().slice(0,10),amt:'',sendDt:'',createdBy:'',notice:'',showNotice:false}
         
     }
 
-    
 
 
     cancleEdit = () => {
@@ -45,24 +44,35 @@ class PostData extends Component {
       const response = await fetch(`https://expense-api-roan.vercel.app/expense`,options)
       const data = await response.json()
       console.log(data)
-      console.log(data.status())
+      console.log(response.status)
+      if (response.status === 200) {
+        console.log("success full post to Db ")
+        this.setState({notice:'',showNotice:false})
+        refreshPost()
+      }
+      else{
+        console.log("Failed ", data.message)
+        this.setState({notice:data.message,showNotice:true})
+
+      }
+
      }
      catch(e) {
-        console.log(e)
+        console.log(e.message)
      }
-     refreshPost()
+     
 
     }
 
     changeName= (event) =>{
         const nameVal = event.target.value
-        console.log(nameVal)
+        // console.log(nameVal)
         this.setState({nm:nameVal})
     }
 
     changeCategory = (event) => {
         const catVal = event.target.value
-        console.log(catVal)
+        // console.log(catVal)
         this.setState({cat:catVal})
     }
     changeDate =(event) => {
@@ -77,18 +87,18 @@ class PostData extends Component {
 
     changeAmount = (event) =>{
         const amtVal = event.target.value
-        console.log(amtVal)
+        // console.log(amtVal)
         this.setState({amt:amtVal})
     }
 
     changeUser = (event) =>{
         const createdBy= event.target.value
-        console.log(createdBy)
+        // console.log(createdBy)
         this.setState({createdBy})
     }
 
     render() {
-         const {nm,cat,dt,amt,createdBy} =this.state
+         const {nm,cat,dt,amt,createdBy,notice,showNotice} =this.state
         return (
             <form  className="form" onSubmit={this.submitData}>
                 <h1>Create New Expense</h1>
@@ -99,7 +109,7 @@ class PostData extends Component {
              <p>Date of Expense</p>
              <input type="text"  onFocus={(e) => e.target.type = 'date'} onBlur={(e)=> e.target.type='text'} onChange={this.changeDate} value={dt}/>
              <p>Expense Amount</p>
-             <input type="text" onChange={this.changeAmount} value={amt}/>
+             <input type="text" className="num-input" placeholder="Only Number as per Schema model" onChange={this.changeAmount} value={amt}/>
              <br />
              <p>Created By</p>
              <input type="text" onChange={this.changeUser} value={createdBy}/>
@@ -107,6 +117,7 @@ class PostData extends Component {
              <br/>
              <button type="button" onClick={this.cancleEdit}>Cancle</button>
              <button type="submit" className="green-but">Create Expense</button>
+             {showNotice && <p className="red">{notice}</p>}
     </form>
         );
     }

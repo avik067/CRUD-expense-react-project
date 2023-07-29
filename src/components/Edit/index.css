@@ -9,3 +9,7 @@
 p{
     max-width:15%
 }
+.red{
+    color: red;
+    min-width: 100%;
+}

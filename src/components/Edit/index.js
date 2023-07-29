@@ -10,7 +10,7 @@ class Edit extends Component {
          const {putDetails} =props
          const {_id='',name='',date_of_expense='' ,category='',amount=0  } = putDetails
          
-        this.state = {nm:name,id:_id,cat:category,dt:new Date(date_of_expense).toISOString().slice(0,10),amt:amount,sendDt:date_of_expense}
+        this.state = {nm:name,id:_id,cat:category,dt:new Date(date_of_expense).toISOString().slice(0,10),amt:amount,sendDt:date_of_expense,notice:'',showNotice:false}
         
     }
 
@@ -46,24 +46,34 @@ class Edit extends Component {
       const response = await fetch(`https://expense-api-roan.vercel.app/expense/${id}/`,options)
       const data = await response.json()
       console.log(data)
-      console.log(data.status())
+      console.log(response.status)
+
+      if (response.status === 200) {
+        console.log("success full edit to Db ")
+        this.setState({notice:'',showNotice:false})
+        refreshPut()
+      }
+      else{
+        console.log("Failed ", data.message)
+        this.setState({notice:data.message,showNotice:true})
+      }
      }
      catch(e) {
         console.log(e)
      }
-     refreshPut()
+     
 
     }
 
     changeName= (event) =>{
         const nameVal = event.target.value
-        console.log(nameVal)
+        // console.log(nameVal)
         this.setState({nm:nameVal})
     }
 
     changeCategory = (event) => {
         const catVal = event.target.value
-        console.log(catVal)
+        // console.log(catVal)
         this.setState({cat:catVal})
     }
     changeDate =(event) => {
@@ -78,12 +88,12 @@ class Edit extends Component {
 
     changeAmount = (event) =>{
         const amtVal = event.target.value
-        console.log(amtVal)
+        // console.log(amtVal)
         this.setState({amt:amtVal})
     }
 
     render() {
-         const {nm,cat,dt,amt} =this.state
+         const {nm,cat,dt,amt,showNotice,notice} =this.state
         return (
             <form  className="form" onSubmit={this.submitData}>
                 <h1>Edit Expense</h1>
@@ -98,6 +108,7 @@ class Edit extends Component {
              <br />
              <button type="button" onClick={this.cancleEdit}>Cancle</button>
              <button type="submit" className="green-but">Create Expense</button>
+             {showNotice && <p className="red">{notice}</p>}
     </form>
         );
     }
