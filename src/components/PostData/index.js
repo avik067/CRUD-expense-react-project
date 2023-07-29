@@ -65,6 +65,7 @@ class PostData extends Component {
     }
 
     changeName= (event) =>{
+
         const nameVal = event.target.value
         // console.log(nameVal)
         this.setState({nm:nameVal})
@@ -76,7 +77,8 @@ class PostData extends Component {
         this.setState({cat:catVal})
     }
     changeDate =(event) => {
-        const date = event.target.value
+        const date = event.target.valueAsNumber
+        
         console.log(date)
         const  dateIso = new Date(date)
         const dateVal=dateIso.toISOString()
@@ -86,7 +88,7 @@ class PostData extends Component {
     } 
 
     changeAmount = (event) =>{
-        const amtVal = event.target.value
+        const amtVal = event.target.valueAsNumber
         // console.log(amtVal)
         this.setState({amt:amtVal})
     }
@@ -107,7 +109,7 @@ class PostData extends Component {
              <p>Category</p>
              <input type="text" onChange={this.changeCategory} value={cat}/>
              <p>Date of Expense</p>
-             <input type="text"  onFocus={(e) => e.target.type = 'date'} onBlur={(e)=> e.target.type='text'} onChange={this.changeDate} value={dt}/>
+             <input type="date"  onKeyDown={(e) => e.preventDefault()} onChange={this.changeDate} value={dt}/>
              <p>Expense Amount</p>
              <input type="text" className="num-input" placeholder="Only Number as per Schema model" onChange={this.changeAmount} value={amt}/>
              <br />
@@ -115,7 +117,7 @@ class PostData extends Component {
              <input type="text" onChange={this.changeUser} value={createdBy}/>
              <br />
              <br/>
-             <button type="button" onClick={this.cancleEdit}>Cancle</button>
+             <button type="button" className="cancel" onClick={this.cancleEdit}>Cancle</button>
              <button type="submit" className="green-but">Create Expense</button>
              {showNotice && <p className="red">{notice}</p>}
     </form>
@@ -123,5 +125,5 @@ class PostData extends Component {
     }
 }
 
-
+// onFocus={(e) => e.target.type = 'date'} onBlur={(e)=> e.target.type='text'}
 export default PostData

@@ -17,13 +17,13 @@ const ListItem = ({details,triggerDel,triggerPut}) => {
     return <li className='row-nor'>
     <p className="p">{name}</p>
     <p className="p">{category}</p>
-    <p className="p">{date_of_expense}</p>
+    <p className="p">{new Date(date_of_expense).toISOString().slice(0,10)}</p>
     <p className="p">{amount}</p>
-    <p className="p">{updatedAt}</p>
+    <p className="p">{new Date(updatedAt).toISOString().slice(0,10)}</p>
     <p className="p">{created_by}</p>
     <div>
-    <button type="button" onClick={editList}>Edit</button>
-    <button type="button" onClick ={delList}>Del</button>
+    <button className="edit" type="button" onClick={editList}>Edit</button>
+    <button className="del" type="button" onClick ={delList}>Del</button>
     </div> 
     </li>
 }

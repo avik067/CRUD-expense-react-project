@@ -12,3 +12,11 @@ p{
 .num-input{
     min-width:34%
 }
+.red{
+    color: red;
+    min-width: 100%;
+}
+
+.cancel{
+    background-color: #3b2637;
+}

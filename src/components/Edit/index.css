@@ -13,3 +13,7 @@ p{
     color: red;
     min-width: 100%;
 }
+
+.cancel{
+    background-color: #3b2637;
+}

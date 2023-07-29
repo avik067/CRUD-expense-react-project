@@ -77,6 +77,7 @@ class Edit extends Component {
         this.setState({cat:catVal})
     }
     changeDate =(event) => {
+        
         const date = event.target.value
         console.log(date)
         const  dateIso = new Date(date)
@@ -87,7 +88,7 @@ class Edit extends Component {
     } 
 
     changeAmount = (event) =>{
-        const amtVal = event.target.value
+        const amtVal = event.target.valueAsNumber
         // console.log(amtVal)
         this.setState({amt:amtVal})
     }
@@ -102,11 +103,11 @@ class Edit extends Component {
              <p>Category</p>
              <input type="text" onChange={this.changeCategory} value={cat}/>
              <p>Date of Expense</p>
-             <input type="text"  onFocus={(e) => e.target.type = 'date'} onBlur={(e)=> e.target.type='text'} onChange={this.changeDate} value={dt}/>
+             <input type="date"  onKeyDown={(e) => e.preventDefault()} onChange={this.changeDate} value={dt}/>
              <p>Expense Amount</p>
              <input type="text" onChange={this.changeAmount} value={amt}/>
              <br />
-             <button type="button" onClick={this.cancleEdit}>Cancle</button>
+             <button type="button" className="cancel" onClick={this.cancleEdit}>Cancle</button>
              <button type="submit" className="green-but">Create Expense</button>
              {showNotice && <p className="red">{notice}</p>}
     </form>
@@ -114,5 +115,5 @@ class Edit extends Component {
     }
 }
 
-
+//onFocus={(e) => e.target.type = 'date'} onBlur={(e)=> e.target.type='text'}
 export default Edit
