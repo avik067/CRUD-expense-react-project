@@ -1,4 +1,8 @@
 
+.side-but-container{
+  min-width: 20%;
+}
+
 .edit{
     background-color: #3b8c5d;
     border:1px solid black;
