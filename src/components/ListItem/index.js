@@ -21,7 +21,7 @@ const ListItem = ({details,triggerDel,triggerPut}) => {
     <p className="p">{amount}</p>
     <p className="p">{new Date(updatedAt).toISOString().slice(0,10)}</p>
     <p className="p">{created_by}</p>
-    <div>
+    <div className='side-but-container'>
     <button className="edit" type="button" onClick={editList}>Edit</button>
     <button className="del" type="button" onClick ={delList}>Del</button>
     </div> 
