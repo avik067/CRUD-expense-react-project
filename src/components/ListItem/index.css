@@ -3,6 +3,10 @@
   min-width: 10%;
 }
 
+.data-list{
+  max-width: 98%;
+}
+
 .edit{
     background-color: #3b8c5d;
     border:1px solid black;

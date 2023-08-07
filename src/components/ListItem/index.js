@@ -14,7 +14,7 @@ const ListItem = ({details,triggerDel,triggerPut}) => {
     }
     
 
-    return <li className='row-nor'>
+    return <li className='data-list row-nor'>
     <p className="p">{name}</p>
     <p className="p">{category}</p>
     <p className="p">{new Date(date_of_expense).toISOString().slice(0,10)}</p>
