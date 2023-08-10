@@ -43,7 +43,7 @@ class Edit extends Component {
         body: JSON.stringify(jsonOb),
       }
      try{
-      const response = await fetch(`https://expense-api-roan.vercel.app/expense/${id}/`,options)
+      const response = await fetch(`https://crud-api-mongo-pagination.vercel.app/expense/${id}/`,options)
       const data = await response.json()
       console.log(data)
       console.log(response.status)

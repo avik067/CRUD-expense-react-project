@@ -41,7 +41,7 @@ class PostData extends Component {
         body: JSON.stringify(jsonOb),
       }
      try{
-      const response = await fetch(`https://expense-api-roan.vercel.app/expense`,options)
+      const response = await fetch(`https://crud-api-mongo-pagination.vercel.app/expense`,options)
       const data = await response.json()
       console.log(data)
       console.log(response.status)
