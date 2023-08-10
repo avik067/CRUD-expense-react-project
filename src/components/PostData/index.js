@@ -20,47 +20,53 @@ class PostData extends Component {
     }
 
 
+    finalSubmitData  = async () => {
+        const {refreshPost} = this.props
+        const {nm,cat,sendDt,amt,createdBy} = this.state
+       
+       const jsonOb= {
+         name:nm ,
+         category:cat,
+         amount:amt ,
+         date_of_expense:sendDt,
+         created_by:createdBy
+       }
+ 
+       const options = {
+         method: 'POST',
+         headers: {
+             "Content-Type": "application/json"
+         },
+         body: JSON.stringify(jsonOb),
+       }
+      try{
+       const response = await fetch(`https://expense-api-roan.vercel.app/expense`,options)
+       const data = await response.json()
+       console.log(data)
+       console.log(response.status)
+       if (response.status === 200) {
+         console.log("success full post to Db ")
+         this.setState({notice:'',showNotice:false})
+         refreshPost()
+       }
+       else{
+         console.log("Failed ", data.message)
+         this.setState({notice:data.message,showNotice:true})
+ 
+       }
+ 
+      }
+      catch(e) {
+         console.log(e.message)
+      }
+    }
+
+
     submitData = async (event) => {
       event.preventDefault()
-      const {refreshPost} = this.props
-       const {nm,cat,sendDt,amt,createdBy} = this.state
-      
-      const jsonOb= {
-        name:nm ,
-        category:cat,
-        amount:amt ,
-        date_of_expense:sendDt,
-        created_by:createdBy
-      }
-
-      const options = {
-        method: 'POST',
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(jsonOb),
-      }
-     try{
-      const response = await fetch(`https://crud-api-mongo-pagination.vercel.app/expense`,options)
-      const data = await response.json()
-      console.log(data)
-      console.log(response.status)
-      if (response.status === 200) {
-        console.log("success full post to Db ")
-        this.setState({notice:'',showNotice:false})
-        refreshPost()
-      }
-      else{
-        console.log("Failed ", data.message)
-        this.setState({notice:data.message,showNotice:true})
-
-      }
-
-     }
-     catch(e) {
-        console.log(e.message)
-     }
-     
+      if (window.confirm(`Are you sure want to create a new record on Database 🤔?`)) {  // we can also use react confirm package , but here we using browser native confirm that is why 
+        this.finalSubmitData()// we are taking confirm method from the browser window   
+        }
 
     }
 

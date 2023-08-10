@@ -16,7 +16,7 @@ class MainPage extends Component {
     
     getData = async () => {
       const {keyWord,page,limit} = this.state
-      const  url= (keyWord === '') ? `https://crud-api-mongo-pagination.vercel.app/expenses?limit=${limit}&page=${page}` : `https://crud-api-mongo-pagination.vercel.app/expense/${keyWord}`
+      const  url= (keyWord === '') ? `https://expense-api-roan.vercel.app/expenses?limit=${limit}&page=${page}` : `https://expense-api-roan.vercel.app/expense/${keyWord}`
       try {
         const rowData = await fetch(url)
         const jsonData = await rowData.json()
@@ -38,7 +38,7 @@ class MainPage extends Component {
             method:"DELETE"  
       }
      try {
-      const rowData = await fetch(`https://crud-api-mongo-pagination.vercel.app/expense/${id}/`,option)   
+      const rowData = await fetch(`https://expense-api-roan.vercel.app/expense/${id}/`,option)   
       const jsonData = await rowData.json()
       console.log("deleted",jsonData)
       this.getData()
