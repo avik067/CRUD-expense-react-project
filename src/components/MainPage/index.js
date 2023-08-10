@@ -104,13 +104,14 @@ class MainPage extends Component {
               
                 <ul className="table"> 
                     <li className="header-list row-nor"> 
-                       <p className="p">Name </p>
-                       <p className="p">Category</p>
-                       <p className="p">Date of Expense</p>
-                       <p className="p">Amount</p>
-                       <p className="p">Updated At</p>
-                       <p className="p">Created by</p>
-                       <p className="button-gap">{}</p>
+                       <p className="p-h">Name </p>
+                       <p className="p-h">Category</p>
+                       <p className="p-h">Date of Expense</p>
+                       <p className="p-h">Amount</p>
+                       <p className="p-h">Updated At</p>
+                       <p className="p-h">Created by</p>
+                       <div className="side-but-container">{}</div>
+                       
                     </li>
                     
                     {isLoading && <div className="row-nor center"><ColorRing
