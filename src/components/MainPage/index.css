@@ -15,6 +15,7 @@
 }
 
 .header-list { 
+
     background-color: gray;
     max-width: 100%;
     padding: 5px;
@@ -29,6 +30,7 @@
  font-weight: 700;
 }
 .p-h{ 
+    text-align: center;
     padding-inline-end:2px;
     overflow: auto;
     min-width:15% ;
